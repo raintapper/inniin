@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block head_title %}Properties || {{ block.super }}{% endblock head_title %}
+
+{% block content %}
+<h1> {{ object.title }} <small>{{ object.location }} </small> </h1>
+<p> Description: {{ object.description }} </p>
+<p> {{ object.timestamp }}, {{ object.updated|timesince }} ago</p>
+
+{% endblock %}

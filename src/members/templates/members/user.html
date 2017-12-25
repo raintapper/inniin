@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block head_title %}{{ user.username }} || {{ block.super }}{% endblock head_title %}
+
+{% block content %}
+<h1> {{ user.username }} </h1>
+<p>{% include 'members/snippet/follow_form.html' with username=user.username is_following=is_following%}</p>
+<form class='form' method='GET' action='.'>
+<input type='text' placeholder="Search.." name='q' value="{{ request.GET.q }}">
+<button class='btn btn-default' type='submit'>Search</button>
+
+{% if locations %}
+{% for property in locations %}
+	<div class='row'>
+	<div class='col-sm-12'><b>{{ property.title }}</b>
+		<div class='card card-default'>
+		<p>
+		<ul>
+			{% for item in property.item_set.all %}
+			<li style='margin-bottom: 15px'>{{ item.itemdesc }}</li>
+				{% for others in item.get_itemnote %}
+					<a href='{{ request.path }}?q= {{others}}'>{{ others }}</a>
+				{% endfor %}
+			{% endfor %}
+		</ul>
+		</p>
+		</div>
+	</div>
+	</div>
+
+
+{% endfor %}
+{% else %}
+<p class='lead'>No Items Found</p>
+{% endif %}
+
+{% endblock %}

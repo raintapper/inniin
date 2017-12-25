@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block head_title %}Properties || {{ block.super }}{% endblock head_title %}
+
+{% block content %}
+<h1> My Properties <small><a href='{% url "properties:create" %}'>Add New</a></h1>
+<ul>
+{% for obj in object_list %}
+	<li><a href='{{ obj.get_absolute_url }}'>{{ obj }}</a><br/>
+	{{ obj.title }} | {{ obj.timestamp }} | {{ obj.description }} | {{ obj.updated }}
+	</li>
+{% empty %}
+	
+	
+	
+
+{% endfor %}
+</ul>
+
+	
+
+{% endblock %}
